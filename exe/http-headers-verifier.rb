@@ -1,18 +1,17 @@
 #!/usr/bin/env ruby
 require 'yaml'
-require 'byebug'
 
 require 'typhoeus'
 
-require_relative './lib/naive_cookie'
-require_relative './lib/http_headers_validations'
-require_relative './lib/http_headers_utils'
+require_relative '../lib/naive_cookie'
+require_relative '../lib/http_headers_validations'
+require_relative '../lib/http_headers_utils'
 
 FILE_NAME_PREFIX = 'headers-rules-'
 HTTP_TIMEOUT_IN_SECONDS = 3
 
 if ARGV.length != 3 && ARGV.length != 2
-    print "usage: http-headers-verifier.rb [comma seperated policy names] [url] [?verbose]"
+    puts "usage: http-headers-verifier.rb [comma seperated policy names] [url] [?verbose]"
     exit 2
 end
 

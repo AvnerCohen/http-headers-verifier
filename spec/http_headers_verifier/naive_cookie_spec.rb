@@ -1,4 +1,3 @@
-require 'byebug'
 require 'rspec'
 
 require './lib/naive_cookie'

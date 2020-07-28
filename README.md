@@ -27,13 +27,13 @@ Or install it yourself as:
 ### Usage
 
 ```sh
-usage: http-headers-verifier [comma seperated policy names] [url] [?verbose]
+usage: http-headers-verifier.rb [comma seperated policy names] [url] [?verbose]
 ```
 
 #### Example
 
 ```sh
-$> ./http-headers-verifier.rb  default,hs-default https://my.login.page/login verbose
+$> http-headers-verifier.rb  default,hs-default https://my.login.page/login verbose
 
 Starting verification of policies default, hs-default, hs-production:
 	🍏 Expected Header 'Cache-Control' matched!
@@ -57,7 +57,7 @@ Starting verification of policies default, hs-default, hs-production:
 Or in non-verbose mode:
 
 ```sh
-$>./http-headers-verifier.rb  default,hs-default https://my.login.page/loginlogin
+$> http-headers-verifier.rb  default,hs-default https://my.login.page/loginlogin
 Starting verification of policies default, hs-default, hs-production:
 	🛑 Invalid cookie config 'COOKIE_NAME':
  		👺   Cookie not secure.

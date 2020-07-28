@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    http-headers-verifier (0.0.1)
+    http-headers-verifier (0.0.2)
       typhoeus (~> 1.4)
 
 GEM
@@ -32,10 +32,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.17)
+  bundler
   byebug (~> 9.0)
   http-headers-verifier!
   rspec (~> 3.0)
 
 BUNDLED WITH
-   1.17.2
+   2.1.4
