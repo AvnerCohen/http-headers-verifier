@@ -15,15 +15,15 @@ if ARGV.length != 3 && ARGV.length != 2
     exit 2
 end
 
-policy_arg, url, verbose = ARGV
+policy_arg, @url, verbose = ARGV
 @policies = policy_arg.split(',')
 
 HttpHeadersUtils.verbose = !verbose.nil?
 
-actual_headers = Typhoeus.get(url, timeout: HTTP_TIMEOUT_IN_SECONDS, followlocation: true).headers
+actual_headers = Typhoeus.get(@url, timeout: HTTP_TIMEOUT_IN_SECONDS, followlocation: true).headers
 
 def verify_headers!(actual_headers, rules)
-    puts "Testing url: #{url}"
+    puts "Testing url: #{@url}"
     puts "Starting verification of policies #{HttpHeadersUtils.bold(@policies.join(", "))}:"
     errors = []
     checked_already = Set.new
