@@ -1,5 +1,7 @@
 # Http Headers Verifier
 
+[![Gem Version](https://badge.fury.io/rb/http-headers-verifier.svg)](https://badge.fury.io/rb/http-headers-verifier)
+
 Verify a pre-defined HTTP headers configurations.
 Unlike some other similar projects, this is not meant to enforce best practices, instead it is meant to define policies on top of headers and enforce them.
 As a side effect, this means you can define specific OWASP (for example) best practices and verify them, but unlike testing for best practices, this is inteneded to verify an expected headers configuration behavior.
