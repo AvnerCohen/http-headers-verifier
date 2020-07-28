@@ -1,0 +1,14 @@
+---
+    headers_to_avoid:
+        - X-Powered-By
+        - X-Aspnet-Version
+        - Via
+        - Server
+        - X-Cache
+        - X-Request-Id
+        - X-AspNet-Version
+        - X-Amzd-Requestid
+    ignored_headers:
+        - Date
+        - Content-Length
+    

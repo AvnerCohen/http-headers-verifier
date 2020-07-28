@@ -1,0 +1,21 @@
+---
+    headers:
+        - Cache-Control: no-store
+        - Content-Type: text/html; charset=UTF-8
+        - Vary: 'Accept-Encoding'
+        - Content-Security-Policy: "block-all-mixed-content;img-src 'self' blob: data:"
+        - Expires: 0
+        - X-Frame-Options: SAMEORIGIN
+        - X-XSS-Protection: 1; mode=block
+        - Strict-Transport-Security: max-age=31536000;
+        - X-Content-Type-Options: nosniff
+    cookie_attr:
+        session:
+            - Path: /
+            - Secured: true
+            - HttpOnly: true
+            - SameSite: None
+    ignored_headers:
+        - Content-Length
+        - Date
+        - Set-Cookie
