@@ -15,7 +15,7 @@ module HttpHeadersValidations
             text = "Expected Header '#{expected_header}' matched!"
         else
             failed = true
-            text = "Expected Header '#{HttpHeadersUtils.bold(expected_header)}' failed! '#{expected_value}' was '#{actual_value}'."
+            text = "Expected Header '#{HttpHeadersUtils.bold(expected_header)}' failed! '#{expected_value}' #{HttpHeadersUtils.bold('was')} '#{actual_value}'."
         end
         icon = failed ? "🛑" : "🍏"
 
