@@ -20,7 +20,8 @@ policy_arg, @url, verbose = ARGV
 
 HttpHeadersUtils.verbose = !verbose.nil?
 
-actual_headers = Typhoeus.get(@url, timeout: HTTP_TIMEOUT_IN_SECONDS, followlocation: true).headers
+request_results = Typhoeus.get(@url, timeout: HTTP_TIMEOUT_IN_SECONDS, followlocation: true)
+actual_headers = request_results.headers
 
 def verify_headers!(actual_headers, rules)
     puts "Testing url: #{@url}"
@@ -80,7 +81,10 @@ def read_policies!(policy_files_names)
 end
 
 
-if verify_headers!(actual_headers, read_policies!(@policies))
+if request_results.return_code != :ok
+    puts "🤕  Request to url #{@url} failed - #{request_results.return_code}, bailing out. "
+    exit 0
+elsif verify_headers!(actual_headers, read_policies!(@policies))
     puts "😎  Success !"
     exit 0
 else

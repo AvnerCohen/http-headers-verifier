@@ -9,7 +9,7 @@ module HttpHeadersValidations
     end
 
     def self.assert_expected_header(expected_header, expected_value, actual_value)
-        if (expected_value.is_a?(Regexp) && actual_value.match?(expected_value)) ||
+        if (!actual_value.nil? && expected_value.is_a?(Regexp) && actual_value.match?(expected_value)) ||
             (expected_value.to_s == actual_value.to_s)
             failed = false
             text = "Expected Header '#{expected_header}' matched!"
