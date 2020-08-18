@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    http-headers-verifier (0.0.7)
+    http-headers-verifier (0.0.8)
       typhoeus (~> 1.4)
 
 GEM
