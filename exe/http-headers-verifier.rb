@@ -65,12 +65,18 @@ end
 def read_policies!(policy_files_names)
     settings = {headers: [], ignored_headers: [], cookie_attr: {}, headers_to_avoid: []}
     policy_files_names.each do |policy_name|
-        policy_data = YAML.load_file("./#{FILE_NAME_PREFIX}#{policy_name}.yml")
-        
-        settings[:headers].push(policy_data['headers']) unless policy_data['headers'].nil?
-        settings[:ignored_headers].push(policy_data['ignored_headers']) unless policy_data['ignored_headers'].nil?
-        settings[:cookie_attr].merge!(policy_data['cookie_attr']) unless policy_data['cookie_attr'].nil?
-        settings[:headers_to_avoid].push(policy_data['headers_to_avoid'])  unless policy_data['headers_to_avoid'].nil?
+        file_name = "./#{FILE_NAME_PREFIX}#{policy_name}.yml"
+        if File.exist?(file_name) 
+            policy_data = YAML.load_file(file_name)
+            settings[:headers].push(policy_data['headers']) unless policy_data['headers'].nil?
+            settings[:ignored_headers].push(policy_data['ignored_headers']) unless policy_data['ignored_headers'].nil?
+            settings[:cookie_attr].merge!(policy_data['cookie_attr']) unless policy_data['cookie_attr'].nil?
+            settings[:headers_to_avoid].push(policy_data['headers_to_avoid'])  unless policy_data['headers_to_avoid'].nil?
+        else
+            puts "💔  Misconfiguration, file #{file_name}, does not exist."
+            exit 1
+        end
+
     end
 
     settings[:headers].flatten!
