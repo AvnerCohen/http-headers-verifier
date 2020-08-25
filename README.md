@@ -3,27 +3,12 @@
 [![Gem Version](https://badge.fury.io/rb/http-headers-verifier.svg)](https://badge.fury.io/rb/http-headers-verifier)
 [![Build Status](https://travis-ci.org/AvnerCohen/http-headers-verifier.svg?branch=master)](https://travis-ci.org/AvnerCohen/http-headers-verifier)
 
-Verify a pre-defined HTTP headers configurations.
+Assertation framework for http-headers on top of live endpoints, Verify a pre-defined HTTP headers configurations.
+
 Unlike some other similar projects, this is not meant to enforce best practices, instead it is meant to define policies on top of headers and enforce them.
 As a side effect, this means you can define specific OWASP (for example) best practices and verify them, but unlike testing for best practices, this is inteneded to verify an expected headers configuration behavior.
 
 Relevant use cases are for example when updating nginx/caddy configuration or when moving from one web-server to another and expecting to maintain a specific set of header config.
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'http-headers-verifier'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install http-headers-verifier
 
 ### Usage
 
@@ -64,6 +49,22 @@ Starting verification of policies default, hs-default, hs-production:
  		👺   Cookie not secure.
 😱  Failed !
 ```
+
+## Installation
+
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'http-headers-verifier'
+```
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install http-headers-verifier
 
 
 ### Configuration
