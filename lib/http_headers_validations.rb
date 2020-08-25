@@ -37,7 +37,7 @@ module HttpHeadersValidations
         else
             icon = "⚠️"
             failed = false
-            text = "Warning: Extra Header '#{HttpHeadersUtils.bold(actual_header)}' with value '#{actual_value}' wasn't unexpected."
+            text = "Warning: Extra Header '#{HttpHeadersUtils.bold(actual_header)}' with value '#{actual_value}' was unexpected."
         end
 
         report(text, failed, icon)
