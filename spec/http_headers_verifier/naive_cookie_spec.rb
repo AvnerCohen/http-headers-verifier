@@ -2,6 +2,9 @@ require 'rspec'
 
 require './lib/naive_cookie'
 
+SAME_SITE_CONFIG = 'test_cookie_name=session_value_here; path=/; expires=Tue, 11 Aug 2020 07:17:12 GMT; Secure; HttpOnly; SameSite=Lax'
+
+
 describe NaiveCookie do
 
     describe "NaiveCookie.secure?" do
@@ -11,13 +14,13 @@ describe NaiveCookie do
             expect(parsed_cookie.secure?).to eq(false)
         end
         it "should mark cookie as secure if secure is present" do
-            cookie_str = "test_cookie_name=session_value_here; path=/; expires=Tue, 11 Aug 2020 07:17:12 GMT; Secure; HttpOnly; SameSite=Lax"
+            cookie_str = SAME_SITE_CONFIG
             parsed_cookie = NaiveCookie.new(cookie_str)
             expect(parsed_cookie.secure?).to eq(true)
 
         end
         it "should mark cookie as secure ignoring case" do
-            cookie_str = "test_cookie_name=session_value_here; path=/; expires=Tue, 11 Aug 2020 07:17:12 GMT; secure; HttpOnly; SameSite=Lax"
+            cookie_str = SAME_SITE_CONFIG
             parsed_cookie = NaiveCookie.new(cookie_str)
             expect(parsed_cookie.secure?).to eq(true)
 
@@ -31,7 +34,7 @@ describe NaiveCookie do
             expect(parsed_cookie.http_only?).to eq(false)
         end
         it "should mark cookie as http_only if http_only is present" do
-            cookie_str = "test_cookie_name=session_value_here; path=/; expires=Tue, 11 Aug 2020 07:17:12 GMT; Secure; HttpOnly; SameSite=Lax"
+            cookie_str = SAME_SITE_CONFIG
             parsed_cookie = NaiveCookie.new(cookie_str)
             expect(parsed_cookie.http_only?).to eq(true)
 
@@ -51,7 +54,7 @@ describe NaiveCookie do
             expect(parsed_cookie.same_site).to eq(nil)
         end
         it "should return SameSite config" do
-            cookie_str = "test_cookie_name=session_value_here; path=/; expires=Tue, 11 Aug 2020 07:17:12 GMT; Secure; HttpOnly; SameSite=Lax"
+            cookie_str = SAME_SITE_CONFIG
             parsed_cookie = NaiveCookie.new(cookie_str)
             expect(parsed_cookie.same_site).to eq("Lax")
 

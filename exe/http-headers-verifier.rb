@@ -9,6 +9,7 @@ require_relative '../lib/http_headers_utils'
 
 FILE_NAME_PREFIX = 'headers-rules-'
 HTTP_TIMEOUT_IN_SECONDS = 3
+SET_COOKIE_NAME = 'set-cookie'
 
 if ARGV.length != 3 && ARGV.length != 2
     puts "usage: http-headers-verifier.rb [comma seperated policy names] [url] [?verbose]"
@@ -40,15 +41,15 @@ def verify_headers!(actual_headers, rules)
     actual_headers.each do |expected_pair|
         actual_header, actual_value = expected_pair[0]
         next if checked_already.include? actual_header
-        next if actual_header.downcase ==  'set-cookie'
+        next if actual_header.downcase ==  SET_COOKIE_NAME
         actual_value = actual_headers[actual_header]
         actual_header_errors = HttpHeadersValidations.assert_extra_header(actual_header, actual_value,
                                       rules[:ignored_headers], rules[:headers_to_avoid])
         errors.push(actual_header_errors)  unless actual_header_errors.nil?
     end
 
-    unless actual_headers["set-cookie"].nil?
-        [actual_headers["set-cookie"]].flatten.each do |cookie_str|
+    unless actual_headers[SET_COOKIE_NAME].nil?
+        [actual_headers[SET_COOKIE_NAME]].flatten.each do |cookie_str|
             parsed_cookie = NaiveCookie.new(cookie_str)
             error_text, failed = HttpHeadersValidations.assert_cookie_value(parsed_cookie, rules[:cookie_attr])
             errors.push(error_text) if failed
