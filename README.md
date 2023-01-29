@@ -1,7 +1,9 @@
 # Http Headers Verifier
 
 [![Gem Version](https://badge.fury.io/rb/http-headers-verifier.svg)](https://badge.fury.io/rb/http-headers-verifier)
-[![Build Status](https://travis-ci.org/AvnerCohen/http-headers-verifier.svg?branch=master)](https://travis-ci.org/AvnerCohen/http-headers-verifier)
+[![Build Status](https://github.com/AvnerCohen/http-headers-verifier/actions/workflows/ruby-rspec.yml/badge.svg)](https://github.com/AvnerCohen/http-headers-verifier/actions)
+
+
 
 Assertation framework for http-headers on top of live endpoints, Verify a pre-defined HTTP headers configurations.
 
