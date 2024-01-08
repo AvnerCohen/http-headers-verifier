@@ -2,9 +2,9 @@ require_relative './http_headers_utils'
 
 module HttpHeadersValidations
 
-    def self.report(text, failed, icon)
+    def self.report(text, failed, status)
         if failed || HttpHeadersUtils.verbose
-            puts "\t#{icon} #{text}"
+            puts "#{status} #{text}"
         end
     end
 
@@ -17,9 +17,9 @@ module HttpHeadersValidations
             failed = true
             text = "Expected Header '#{HttpHeadersUtils.bold(expected_header)}' failed! \nExpected Value:\n#{expected_value} \nActual Value:\n#{actual_value}."
         end
-        icon = failed ? "🛑" : "🍏"
+        status = failed ? "[FAILED]" : "[PASSED]"
 
-        report(text, failed, icon)
+        report(text, failed, status)
     
         return text if failed 
     end
@@ -27,20 +27,20 @@ module HttpHeadersValidations
     def self.assert_extra_header(actual_header, actual_value, ignored_headers, avoid_headers)
     
         if avoid_headers.include? actual_header.downcase
-            icon = "🛑"
+            status = "[FAILED]"
             failed = true
             text = "Extra Header '#{actual_header}' is not allowed!"
         elsif ignored_headers.include? actual_header.downcase
-            icon = "🍏"
+            status = "[PASSED]"
             failed = false
             text = "Extra Header '#{actual_header}' marked for ignore!"
         else
-            icon = "⚠️"
+            status = "[WARNING]"
             failed = false
             text = "Warning: Extra Header '#{HttpHeadersUtils.bold(actual_header)}' with value '#{actual_value}' was unexpected."
         end
 
-        report(text, failed, icon)
+        report(text, failed, status)
         
         return text if failed 
     end
@@ -59,9 +59,9 @@ module HttpHeadersValidations
             failed = true
             text = "Missing config for cookie '#{HttpHeadersUtils.bold(parsed_cookie.name)}'."
         end
-        icon = failed ? "🛑" : "🍏"
+        status = failed ? "[FAILED]" : "[PASSED]"
 
-        report(text, failed, icon)
+        report(text, failed, status)
         return [text, failed]
     end
 

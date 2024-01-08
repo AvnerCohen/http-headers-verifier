@@ -34,13 +34,13 @@ def verify_headers!(actual_headers, rules)
         expected_value = expected_pair[expected_header]
         actual_value = actual_headers[expected_header]
         checked_already.add(expected_header.downcase)
-        epected_header_error = HttpHeadersValidations.assert_expected_header(expected_header, expected_value, actual_value)
-        errors.push(epected_header_error)  unless epected_header_error.nil?
+        expected_header_error = HttpHeadersValidations.assert_expected_header(expected_header, expected_value, actual_value)
+        errors.push(expected_header_error)  unless expected_header_error.nil?
     end
 
     actual_headers.each do |expected_pair|
         actual_header, actual_value = expected_pair[0]
-        next if checked_already.include? actual_header
+        next if checked_already.include? actual_header.downcase
         next if actual_header.downcase ==  SET_COOKIE_NAME
         actual_value = actual_headers[actual_header]
         actual_header_errors = HttpHeadersValidations.assert_extra_header(actual_header, actual_value,
@@ -74,7 +74,7 @@ def read_policies!(policy_files_names)
             settings[:cookie_attr].merge!(policy_data['cookie_attr']) unless policy_data['cookie_attr'].nil?
             settings[:headers_to_avoid].push(policy_data['headers_to_avoid'])  unless policy_data['headers_to_avoid'].nil?
         else
-            puts "💔  Misconfiguration, file #{file_name}, does not exist."
+            puts "[FAILED]  Misconfiguration, file #{file_name}, does not exist."
             exit 1
         end
 
@@ -89,13 +89,13 @@ end
 
 
 if request_results.return_code != :ok
-    puts "🤕  Request to url #{@url} failed - #{request_results.return_code}, bailing out. "
+    puts "[FAILED]  Request to url #{@url} failed - #{request_results.return_code}, bailing out. "
     exit 0
 elsif verify_headers!(actual_headers, read_policies!(@policies))
-    puts "😎  Success !"
+    puts "Success !"
     exit 0
 else
-    puts "😱  Failed !"
+    puts "Failed !"
     exit 1
 end
 
